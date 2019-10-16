@@ -4,10 +4,13 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Reflection;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using GongFuTimer.Models;
+using Plugin.SimpleAudioPlayer;
+
 
 namespace GongFuTimer
 {
@@ -20,6 +23,7 @@ namespace GongFuTimer
         ViewModel.TimerViewModel timerViewModel;
         private double targetSeconds = 0.0;
         double infNum = 0.0;
+        ISimpleAudioPlayer alarmPlayer = CrossSimpleAudioPlayer.Current;
 
         public Color barColour;
 
@@ -28,6 +32,7 @@ namespace GongFuTimer
             InitializeComponent();
             teaTimer.Clear();
             timerViewModel = new ViewModel.TimerViewModel(StartTimer, ClearTimer);
+            alarmPlayer.Load("Alarm.wav");
 
             BindingContext = timerViewModel;
 
@@ -93,6 +98,7 @@ namespace GongFuTimer
                 timerViewModel.InfNum = infNum.ToString();
                 timerViewModel.formatTimerNum(0.0);
                 timerViewModel.IsBusy = false;
+                alarmPlayer.Play();
             }
 
             if (teaTimer.isRunning)
