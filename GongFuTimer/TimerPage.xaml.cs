@@ -32,13 +32,18 @@ namespace GongFuTimer
             InitializeComponent();
             teaTimer.Clear();
             timerViewModel = new ViewModel.TimerViewModel(StartTimer, ClearTimer);
-            alarmPlayer.Load("Alarm.wav");
+
+            var assembly = typeof(App).GetTypeInfo().Assembly;
+            var stream = assembly.GetManifestResourceStream($"GongFuTimer.Audio." + "Alarm.wav");
+            alarmPlayer.Load(stream);
 
             BindingContext = timerViewModel;
 
             SetToolbarColours(Color.OrangeRed, Color.White, true);
             // update loop
             Device.BeginInvokeOnMainThread(MainLoop);
+
+            timerViewModel.PresetList.Add(new Tea());
         }
 
         protected override void OnAppearing()
@@ -50,7 +55,7 @@ namespace GongFuTimer
         {
             await Navigation.PushAsync(new PresetsPage
             {
-                BindingContext = new Note()
+                BindingContext = new Tea()
             });            
         }
 

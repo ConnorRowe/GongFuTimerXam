@@ -12,6 +12,8 @@ namespace GongFuTimer
         {
             InitializeComponent();
 
+            Xamarin.Forms.DataGrid.DataGridComponent.Init();
+
             FolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
             MainPage = new NavigationPage(new TimerPage());
 
