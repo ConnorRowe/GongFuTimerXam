@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GongFuTimer.TimerPage"
+             x:Name="parent"
+             Title="Gong Fu Timer">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Presets" Clicked="OnPresetClicked" />
+    </ContentPage.ToolbarItems>
+
+
+    <Grid VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="60*"/>
+            <ColumnDefinition Width="20*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25*"/> <!-- Tea preset info -->
+            <RowDefinition Height="35*"/> <!-- Infunsion input / info -->
+            <RowDefinition Height="30*"/> <!-- Buttons -->
+            <RowDefinition Height="25*"/> <!-- Timer output -->
+        </Grid.RowDefinitions>
+
+        <!-- Tea preset info -->
+        <StackLayout Grid.Column="0" Grid.ColumnSpan="3" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,8,0,8">
+            <Label Text="Tea Name"/>
+            <Label Text="Black, brew at 90°C for 8 infusions."/>
+            <Label Text="Alt name" FontAttributes="Italic"/>
+        </StackLayout>
+
+        <!-- Infusion input / info -->
+        <Frame Grid.Column="1" Grid.Row="1" VerticalOptions="End" HorizontalOptions="Fill">
+            <StackLayout Orientation="Vertical">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="Fill">
+                    <Label Text="Base Secs:" AnchorY="0.5"/>
+                    <Entry Placeholder="0" WidthRequest="40" Text="{Binding BaseSecs}" Keyboard="Numeric" HorizontalOptions="EndAndExpand" HorizontalTextAlignment="End"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="Fill">
+                    <Label Text="+ Secs:"/>
+                    <Entry Placeholder="0" WidthRequest="40" Text="{Binding PlusSecs}" Keyboard="Numeric" HorizontalOptions="EndAndExpand" HorizontalTextAlignment="End"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" Margin="0,8,0,0" VerticalOptions="Fill">
+                    <Label Text="Infusion #:"/>
+                    <Label  Text="{Binding InfNum}" TextColor="Black" FontSize="Medium" HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+
+        <!-- Buttons -->
+        <StackLayout Grid.Row="2" Grid.Column="1" VerticalOptions="End" Margin="0,0,0,8">
+            <Button Text="Start" Command="{Binding StartTimerCommand}" IsEnabled="{Binding IsBusy}" VerticalOptions="End"/>
+            <Button Text="Reset" Command="{Binding ResetTimerCommand}" VerticalOptions="End"/>
+        </StackLayout>
+
+        <!-- Timer output -->
+        <Frame Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+            <Label Text="{Binding TimerOutput}" FontSize="48" MaxLines="1"/>
+        </Frame>
+    </Grid>
+</ContentPage>
