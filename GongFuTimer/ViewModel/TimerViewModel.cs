@@ -15,7 +15,6 @@ namespace GongFuTimer.ViewModel
         {
             StartTimerCommand = new Command(starttimercmd, () => !IsBusy);
             ResetTimerCommand = new Command(resettimercmd);
-            presetList = Tea.getTestTeaList();
         }
 
         private string baseSecs = "0";
@@ -23,7 +22,6 @@ namespace GongFuTimer.ViewModel
         private string infNum = "0";
         private string timerOutput = "00:00:00";
         private bool isBusy = false;
-        private List<Tea> presetList;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -92,19 +90,6 @@ namespace GongFuTimer.ViewModel
                 if (isBusy != value)
                 {
                     isBusy = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public List<Tea> PresetList
-        {
-            get { return presetList; }
-            set
-            {
-                if (presetList != value)
-                {
-                    presetList = value;
                     OnPropertyChanged();
                 }
             }

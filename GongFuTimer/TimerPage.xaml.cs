@@ -25,8 +25,6 @@ namespace GongFuTimer
         double infNum = 0.0;
         ISimpleAudioPlayer alarmPlayer = CrossSimpleAudioPlayer.Current;
 
-        public Color barColour;
-
         public TimerPage()
         {
             InitializeComponent();
@@ -42,8 +40,6 @@ namespace GongFuTimer
             SetToolbarColours(Color.OrangeRed, Color.White, true);
             // update loop
             Device.BeginInvokeOnMainThread(MainLoop);
-
-            timerViewModel.PresetList.Add(new Tea());
         }
 
         protected override void OnAppearing()
@@ -55,7 +51,7 @@ namespace GongFuTimer
         {
             await Navigation.PushAsync(new PresetsPage
             {
-                BindingContext = new Tea()
+                BindingContext = new ViewModel.PresetsViewModel()
             });            
         }
 

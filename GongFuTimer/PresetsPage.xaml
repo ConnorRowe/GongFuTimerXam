@@ -1,9 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:dg="clr-namespace:Xamarin.Forms.DataGrid;assembly=Xamarin.Forms.DataGrid"
              x:Class="GongFuTimer.PresetsPage"
              Title="Presets">
-    <StackLayout Margin="20">
-        <Label Text="NOT YET IMPLEMENTED"/>
-    </StackLayout>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="90*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75*"/>
+            <RowDefinition Height="25*"/>
+        </Grid.RowDefinitions>
+
+        <dg:DataGrid ItemsSource="{Binding PresetsList}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" BorderColor="#CCCCCC" HeaderBackground="#E0E6F8" SelectedItem="{Binding SelectedTea}">
+            <dg:DataGrid.HeaderFontSize>
+                <OnIdiom  x:TypeArguments="x:Double">
+                    <OnIdiom.Tablet>15</OnIdiom.Tablet>
+                    <OnIdiom.Phone>13</OnIdiom.Phone>
+                </OnIdiom>
+            </dg:DataGrid.HeaderFontSize>
+            <dg:DataGrid.Columns>
+                <dg:DataGridColumn Title="Name" PropertyName="Name" Width="20*"/>
+                <dg:DataGridColumn Title="Type" PropertyName="Type" Width="6*"/>
+                <dg:DataGridColumn Title="Base Secs" PropertyName="BaseSeconds" Width="5*"/>
+                <dg:DataGridColumn Title="+ Secs" PropertyName="PlusSeconds" Width="5*"/>
+                <dg:DataGridColumn Title="Temp" PropertyName="Temp" Width="5*"/>
+                <dg:DataGridColumn Title="Max Infusions" PropertyName="MaxInfusions" Width="5*"/>
+                <dg:DataGridColumn Title="Alt Name" PropertyName="AltName" Width="6*"/>
+            </dg:DataGrid.Columns>
+        </dg:DataGrid>
+        
+        
+        <StackLayout Margin="4" Grid.Column="1" Grid.Row="1">
+            <Label Text="{Binding SelectedTea.Name}"/>
+        </StackLayout>
+    </Grid>
+
 </ContentPage>
