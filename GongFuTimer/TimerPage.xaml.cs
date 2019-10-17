@@ -8,9 +8,8 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using GongFuTimer.Models;
 using Plugin.SimpleAudioPlayer;
-
+using GongFuTimer.ViewModel;
 
 namespace GongFuTimer
 {
@@ -51,7 +50,7 @@ namespace GongFuTimer
         {
             await Navigation.PushAsync(new PresetsPage
             {
-                BindingContext = new ViewModel.PresetsViewModel()
+                BindingContext = new Preset()
             });            
         }
 

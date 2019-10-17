@@ -2,19 +2,32 @@
 using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using GongFuTimer.Data;
 
 namespace GongFuTimer
 {
     public partial class App : Application
     {
-        public static string FolderPath { get; private set; }
+        static PresetDatabase database;
+
+        public static PresetDatabase Database
+        {
+            get
+            {
+                if (database == null)
+                {
+                    database = new PresetDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Presets.db3"));
+                }
+                return database;
+            }
+        }
+
         public App()
         {
             InitializeComponent();
 
             Xamarin.Forms.DataGrid.DataGridComponent.Init();
 
-            FolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
             MainPage = new NavigationPage(new TimerPage());
 
 

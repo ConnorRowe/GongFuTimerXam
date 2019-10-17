@@ -4,7 +4,6 @@ using System.Text;
 using System.ComponentModel;
 using Xamarin.Forms;
 using System.Runtime.CompilerServices;
-using GongFuTimer.Models;
 
 namespace GongFuTimer.ViewModel
 {
