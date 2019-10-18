@@ -1,7 +1,9 @@
 ﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Xamarin.Forms;
 
 namespace GongFuTimer.ViewModel
 {
@@ -18,6 +20,7 @@ namespace GongFuTimer.ViewModel
             {
                 "Black", "Green", "Matcha", "Oolong", "Raw Pu Ehr", "Ripened Pu Ehr", "White", "Yellow", "Tisane", "Medicinal Herbs"
             };
+            isDataGridEnabled = true;
         }
 
         [PrimaryKey, AutoIncrement]
@@ -50,27 +53,47 @@ namespace GongFuTimer.ViewModel
         }
 
         [Ignore]
-        private Preset selectedPreset { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        void OnPropertyChanged([CallerMemberName] string name = "")
+        private bool isDataGridEnabled { get; set; }
+        [Ignore]
+        public bool IsDataGridEnabled
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            get { return isDataGridEnabled; }
+            set
+            {
+                if(isDataGridEnabled != value)
+                {
+                    isDataGridEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
         }
-
+        [Ignore]
+        private Preset selectedPreset { get; set; }
         [Ignore]
         public Preset SelectedPreset
         {
             get { return selectedPreset; }
             set
             {
-                if (selectedPreset != value)
+                if(selectedPreset != value)
                 {
                     selectedPreset = value;
                     OnPropertyChanged();
+
+                    RowColour = App.teaColoursDarkTxt[(int)SelectedPreset.type];
+                    OnPropertyChanged("RowColour");
                 }
             }
+        }
+
+        [Ignore]
+        public Color RowColour { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        void OnPropertyChanged([CallerMemberName] string name = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 }

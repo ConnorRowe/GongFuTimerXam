@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using System.Collections.Generic;
 using GongFuTimer.ViewModel;
 
 namespace GongFuTimer
@@ -29,13 +31,21 @@ namespace GongFuTimer
             PresetsDatagrid.ItemsSource = await App.Database.GetPresetsAsync();
         }
 
-        async private void Button_Clicked(object sender, EventArgs e)
+        async private void ApplyButton_Clicked(object sender, EventArgs e)
         {
             //var test = await App.Database.GetPresetsAsync();
             Preset preset = new Preset();
             preset.name = "Test";
             preset.altname = "AltTest";
             await App.Database.SavePresetAsync(preset);
+        }
+
+        async private void DeleteButton_Clicked(object sender, EventArgs e)
+        {
+            Preset preset = ((Preset)BindingContext).SelectedPreset;
+            await App.Database.DeletePresetAsync(preset);
+            
+            PresetsDatagrid.ItemsSource = await App.Database.GetPresetsAsync(); ;
         }
     }
 }

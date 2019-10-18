@@ -18,7 +18,7 @@
             <RowDefinition Height="25*"/>
         </Grid.RowDefinitions>
 
-        <dg:DataGrid x:Name="PresetsDatagrid" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" BorderColor="#CCCCCC" HeaderBackground="#E0E6F8" SelectedItem="{Binding SelectedPreset}" IsSortable="False">
+        <dg:DataGrid x:Name="PresetsDatagrid" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" BorderColor="#CCCCCC" HeaderBackground="#E0E6F8" SelectedItem="{Binding SelectedPreset}" IsSortable="False" SelectionEnabled="True" IsEnabled="True" ActiveRowColor="{Binding RowColour}" >
             <dg:DataGrid.HeaderFontSize>
                 <OnIdiom  x:TypeArguments="x:Double">
                     <OnIdiom.Tablet>15</OnIdiom.Tablet>
@@ -29,7 +29,6 @@
                 <dg:DataGridColumn Title="Name" PropertyName="name" Width="10*"/>
                 <dg:DataGridColumn Title="Type" PropertyName="type" Width="8*"/>
                 <dg:DataGridColumn Title="Base Secs" PropertyName="baseseconds" Width="4*"/>
-                <dg:DataGridColumn Title="+ Secs" PropertyName="plusseconds" Width="4*"/>
                 <dg:DataGridColumn Title="Temp" PropertyName="temp" Width="4*"/>
                 <dg:DataGridColumn Title="Max Infusions" PropertyName="maxinfusions" Width="4*"/>
                 <dg:DataGridColumn Title="Alt Name" PropertyName="altname" Width="8*"/>
@@ -38,8 +37,8 @@
         
         
         <StackLayout Margin="4" Grid.Column="1" Grid.Row="1">
-            <Label Text="{Binding SelectedPreset.Name}"/>
-            <Button Text="test" Clicked="Button_Clicked"/>
+            <Button Text="Apply" Clicked="ApplyButton_Clicked"/>
+            <Button Text="Delete" Clicked="DeleteButton_Clicked"/>
         </StackLayout>
     </Grid>
 
