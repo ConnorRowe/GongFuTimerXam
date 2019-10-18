@@ -21,6 +21,9 @@ namespace GongFuTimer.ViewModel
         private string infNum = "0";
         private string timerOutput = "00:00:00";
         private bool isBusy = false;
+        private string teaName = string.Empty;
+        private string teaDetails = string.Empty;
+        private string teaAltName = string.Empty;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -89,6 +92,43 @@ namespace GongFuTimer.ViewModel
                 if (isBusy != value)
                 {
                     isBusy = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string TeaName
+        {
+            get { return teaName; }
+            set
+            {
+                if (teaName != value)
+                {
+                    teaName = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public string TeaDetails
+        {
+            get { return teaDetails; }
+            set
+            {
+                if (teaDetails != value)
+                {
+                    teaDetails = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public string TeaAltName
+        {
+            get { return teaAltName; }
+            set
+            {
+                if (teaAltName != value)
+                {
+                    teaAltName = value;
                     OnPropertyChanged();
                 }
             }

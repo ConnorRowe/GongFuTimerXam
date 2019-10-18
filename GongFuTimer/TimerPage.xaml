@@ -24,9 +24,9 @@
 
         <!-- Tea preset info -->
         <StackLayout Grid.Column="0" Grid.ColumnSpan="3" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,8,0,8">
-            <Label Text="Tea Name"/>
-            <Label Text="Black, brew at 90°C for 8 infusions."/>
-            <Label Text="Alt name" FontAttributes="Italic"/>
+            <Label Text="{Binding TeaName}"/>
+            <Label Text="{Binding TeaDetails}"/>
+            <Label Text="{Binding TeaAltName}" FontAttributes="Italic"/>
         </StackLayout>
 
         <!-- Infusion input / info -->

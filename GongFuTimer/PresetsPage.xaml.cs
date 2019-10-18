@@ -11,8 +11,15 @@ namespace GongFuTimer
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PresetsPage : ContentPage
     {
+        TimerPage timerPage;
+
         public PresetsPage()
         {
+            InitializeComponent();
+        }
+        public PresetsPage(TimerPage timerpage)
+        {
+            timerPage = timerpage;
             InitializeComponent();
         }
 
@@ -33,19 +40,18 @@ namespace GongFuTimer
 
         async private void ApplyButton_Clicked(object sender, EventArgs e)
         {
-            //var test = await App.Database.GetPresetsAsync();
-            Preset preset = new Preset();
-            preset.name = "Test";
-            preset.altname = "AltTest";
-            await App.Database.SavePresetAsync(preset);
+            timerPage.ApplyPreset(((Preset)BindingContext).SelectedPreset);
+            await Navigation.PopAsync();
         }
 
         async private void DeleteButton_Clicked(object sender, EventArgs e)
         {
             Preset preset = ((Preset)BindingContext).SelectedPreset;
+            ((Preset)BindingContext).SelectedPreset = null;
             await App.Database.DeletePresetAsync(preset);
             
-            PresetsDatagrid.ItemsSource = await App.Database.GetPresetsAsync(); ;
+            PresetsDatagrid.ItemsSource = await App.Database.GetPresetsAsync();
+
         }
     }
 }

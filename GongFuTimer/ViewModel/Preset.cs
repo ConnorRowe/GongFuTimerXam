@@ -80,8 +80,16 @@ namespace GongFuTimer.ViewModel
                     selectedPreset = value;
                     OnPropertyChanged();
 
-                    RowColour = App.teaColoursDarkTxt[(int)SelectedPreset.type];
-                    OnPropertyChanged("RowColour");
+                    if (selectedPreset != null)
+                    {
+
+                        int rowColourIndex = (int)SelectedPreset.type;
+                        if (rowColourIndex < 0)
+                            rowColourIndex = 0;
+
+                        RowColour = App.teaColoursDarkTxt[rowColourIndex];
+                        OnPropertyChanged("RowColour");
+                    }
                 }
             }
         }
