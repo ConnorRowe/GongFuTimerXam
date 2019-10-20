@@ -143,13 +143,16 @@ namespace GongFuTimer
 
         public void ApplyPreset(Preset preset)
         {
-            TimerViewModel viewModel = (TimerViewModel)BindingContext;
-            viewModel.BaseSecs = preset.baseseconds.ToString();
-            viewModel.PlusSecs = preset.plusseconds.ToString();
-            viewModel.TeaName = preset.name;
-            viewModel.TeaAltName = preset.altname;
-            viewModel.TeaDetails = String.Format("{0}, brew at {1}°C for {2} infusions.", App.teaTypeNames[(int)preset.type], preset.temp, preset.maxinfusions);
-            SetToolbarColours(App.teaColoursDarkTxt[(int)preset.type], Color.Black, false);
+            if (preset != null)
+            {
+                TimerViewModel viewModel = (TimerViewModel)BindingContext;
+                viewModel.BaseSecs = preset.baseseconds.ToString();
+                viewModel.PlusSecs = preset.plusseconds.ToString();
+                viewModel.TeaName = preset.name;
+                viewModel.TeaAltName = preset.altname;
+                viewModel.TeaDetails = String.Format("{0}, brew at {1}°C for {2} infusions.", App.teaTypeNames[(int)preset.type], preset.temp, preset.maxinfusions);
+                SetToolbarColours(App.teaColoursDarkTxt[(int)preset.type], Color.Black, false);
+            }
         }
     }
 }
