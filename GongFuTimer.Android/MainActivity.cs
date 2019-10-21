@@ -4,11 +4,6 @@ using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
-using Android.Support.V4.App;
-using System;
-using TaskStackBuilder = Android.Support.V4.App.TaskStackBuilder;
-using Java.Lang;
-using Xamarin.Forms;
 
 namespace GongFuTimer.Droid
 {

@@ -1,10 +1,9 @@
-﻿using System;
-using System.IO;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+﻿using GongFuTimer.Data;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Push;
-using GongFuTimer.Data;
+using System;
+using System.IO;
+using Xamarin.Forms;
 
 namespace GongFuTimer
 {

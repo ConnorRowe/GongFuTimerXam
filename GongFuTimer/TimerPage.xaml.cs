@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Threading;
+﻿using GongFuTimer.ViewModel;
+using Plugin.SimpleAudioPlayer;
+using System;
 using System.Reflection;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Plugin.SimpleAudioPlayer;
-
-using GongFuTimer.ViewModel;
 
 namespace GongFuTimer
 {

@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.ComponentModel;
-using Xamarin.Forms;
 using System.Runtime.CompilerServices;
+using Xamarin.Forms;
 
 namespace GongFuTimer.ViewModel
 {

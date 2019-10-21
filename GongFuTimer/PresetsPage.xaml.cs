@@ -1,10 +1,7 @@
-﻿using System;
-using System.IO;
-using System.Threading.Tasks;
+﻿using GongFuTimer.ViewModel;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using System.Collections.Generic;
-using GongFuTimer.ViewModel;
 
 namespace GongFuTimer
 {
