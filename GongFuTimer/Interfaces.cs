@@ -2,6 +2,6 @@
 {
     public interface ILocalNotification
     {
-        void CreateNotification();
+        void CreateNotification(string contentText, long delayMillis = 0);
     }
 }

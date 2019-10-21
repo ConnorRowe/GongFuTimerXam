@@ -98,7 +98,7 @@ namespace GongFuTimer
                 if(!App.IsInForeground)
                 {
                     ILocalNotification service = DependencyService.Get<ILocalNotification>();
-                    service.CreateNotification();
+                    service.CreateNotification(timerViewModel.TeaName);
                 }
 
                 teaTimer.Clear();
