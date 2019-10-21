@@ -14,16 +14,18 @@ namespace GongFuTimer
         DateTime LastFrameTime = DateTime.Now;
         double delta = double.MinValue;
         public Timer teaTimer = new Timer();
-        ViewModel.TimerViewModel timerViewModel;
+        readonly TimerViewModel timerViewModel;
         private double targetSeconds = 0.0;
         double infNum = 0.0;
         ISimpleAudioPlayer alarmPlayer = CrossSimpleAudioPlayer.Current;
+        private readonly ILocalNotification notificationService;
 
         public TimerPage()
         {
             InitializeComponent();
             teaTimer.Clear();
-            timerViewModel = new ViewModel.TimerViewModel(StartTimer, ClearTimer);
+            timerViewModel = new TimerViewModel(StartTimer, ClearTimer);
+            notificationService = DependencyService.Get<ILocalNotification>();
 
             var assembly = typeof(App).GetTypeInfo().Assembly;
             var stream = assembly.GetManifestResourceStream($"GongFuTimer.Audio." + "Alarm.wav");
@@ -31,7 +33,6 @@ namespace GongFuTimer
 
             BindingContext = timerViewModel;
 
-            SetToolbarColours(Color.OrangeRed, Color.White, true);
             // update loop
             Device.BeginInvokeOnMainThread(MainLoop);
         }
@@ -91,8 +92,11 @@ namespace GongFuTimer
             {
                 if(!App.IsInForeground)
                 {
-                    ILocalNotification service = DependencyService.Get<ILocalNotification>();
-                    service.CreateNotification(timerViewModel.TeaName);
+                    notificationService.CreateNotification(timerViewModel.TeaName);
+                }
+                else
+                {
+                    notificationService.CancelNotification();
                 }
 
                 teaTimer.Clear();
@@ -100,7 +104,6 @@ namespace GongFuTimer
                 timerViewModel.formatTimerNum(0.0);
                 timerViewModel.IsBusy = false;
                 alarmPlayer.Play();
-                
             }
 
             if (teaTimer.isRunning)

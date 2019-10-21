@@ -10,12 +10,12 @@ using Xamarin.Forms;
 [assembly: Dependency(typeof(NotificationService))]
 public class NotificationService : ILocalNotification
 {
-    public void CreateNotification(string contentText, long delayMillis = 0)
+    public void CreateNotification(string contentText)
     {
         string teaName = "tea";
         if (contentText != string.Empty)
         {
-            teaName = contentText.ToLower();
+            teaName = contentText.ToLower().Trim();
         }
 
         //Get context using CurrentActivity plugin
@@ -31,8 +31,8 @@ public class NotificationService : ILocalNotification
                       .SetAutoCancel(true) // Dismiss the notification from the notification area when the user clicks on it
                       .SetContentIntent(pendingIntent) // Start up this activity when the user clicks the intent.
                       .SetContentTitle("Timer Complete") // Set the title
-                      .SetSmallIcon(Resource.Drawable.ic_stat_button_click) // This is the icon to display
-                      .SetWhen(Java.Lang.JavaSystem.CurrentTimeMillis() + delayMillis)
+                      .SetSmallIcon(Resource.Drawable.ic_notification) // This is the icon to display
+                      .SetWhen(Java.Lang.JavaSystem.CurrentTimeMillis())
                       .SetContentText($"Your {teaName} is ready!"); // the message to display.        
 
         // Finally, publish the notification:

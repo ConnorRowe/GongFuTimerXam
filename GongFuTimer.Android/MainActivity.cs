@@ -7,7 +7,7 @@ using Android.Runtime;
 
 namespace GongFuTimer.Droid
 {
-    [Activity(Label = "GongFuTimer", Icon = "@mipmap/icon", Theme = "@style/MainTheme", LaunchMode = LaunchMode.SingleTop, MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]   //LaunchMode.SingleTop ensures this activity is resumed when the notification is clicked
+    [Activity(Label = "GongFuTimer", Theme = "@style/MainTheme", LaunchMode = LaunchMode.SingleTop, MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]   //LaunchMode.SingleTop ensures this activity is resumed when the notification is clicked
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         public static readonly int NOTIFICATION_ID = 1000;
