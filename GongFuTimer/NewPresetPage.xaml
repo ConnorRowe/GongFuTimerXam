@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              mc:Ignorable="d"
+             Title="Create a New Preset"
              x:Class="GongFuTimer.NewPresetPage">
     <ContentPage.Content>
         <Grid>
