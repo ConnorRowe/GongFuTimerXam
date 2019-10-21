@@ -22,6 +22,7 @@ namespace GongFuTimer.ViewModel
         private string teaName = string.Empty;
         private string teaDetails = string.Empty;
         private string teaAltName = string.Empty;
+        public int teaType { get; set; } = -1;
 
         public event PropertyChangedEventHandler PropertyChanged;
 

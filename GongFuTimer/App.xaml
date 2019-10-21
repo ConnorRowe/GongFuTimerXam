@@ -6,6 +6,5 @@
              mc:Ignorable="d"
              x:Class="GongFuTimer.App">
     <Application.Resources>
-
     </Application.Resources>
 </Application>

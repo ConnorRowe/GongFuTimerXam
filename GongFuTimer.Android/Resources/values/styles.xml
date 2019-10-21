@@ -22,9 +22,20 @@
     <item name="windowActionModeOverlay">true</item>
 
     <item name="android:datePickerDialogTheme">@style/AppCompatDialogStyle</item>
+    
   </style>
 
   <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
     <item name="colorAccent">#FF4081</item>
+  </style>
+
+  <style name="AppToolbarLight" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
+    <item name="android:actionMenuTextColor">#7F000000</item>
+    <item name="android:textColorPrimary">#7F000000</item>
+  </style>
+
+  <!--currently unused-->
+  <style name="AppToolbarDark" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
+    <item name="android:textColorPrimary">#000</item>
   </style>
 </resources>

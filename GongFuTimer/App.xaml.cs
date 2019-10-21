@@ -16,7 +16,6 @@ namespace GongFuTimer
         public static readonly Color[] teaColoursDarkTxt = new Color[10] { Color.FromHex("ac0000"), Color.FromHex("59914f"), Color.FromHex("057400"), Color.FromHex("535da1"), Color.FromHex("008487"), Color.FromHex("5a2213"), Color.FromHex("cde1db"), Color.FromHex("fed25a"), Color.FromHex("fcdcd8"), Color.FromHex("f36e21") };
         public static readonly string[] teaTypeNames = new string[10] { "Black", "Green", "Matcha", "Oolong", "Raw Pu Ehr", "Ripened Pu Ehr", "White", "Yellow", "Tisane", "Medicinal Herbs" };
 
-
         public static PresetDatabase Database
         {
             get

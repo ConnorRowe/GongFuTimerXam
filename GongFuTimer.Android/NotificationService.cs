@@ -10,16 +10,26 @@ using Xamarin.Forms;
 [assembly: Dependency(typeof(NotificationService))]
 public class NotificationService : ILocalNotification
 {
-    public void CreateNotification(string contentText)
+    public void CreateNotification(string contentText, int teaType)
     {
+        //Get context using CurrentActivity plugin
+        var context = (MainActivity)CrossCurrentActivity.Current.Activity;
+
         string teaName = "tea";
         if (contentText != string.Empty)
         {
             teaName = contentText.ToLower().Trim();
         }
 
-        //Get context using CurrentActivity plugin
-        var context = (MainActivity)CrossCurrentActivity.Current.Activity;
+        Android.Graphics.Color notiColour = Android.Graphics.Color.Black;
+        bool isColorized = false;
+        if (teaType > -1)
+        {
+            isColorized = true;
+            notiColour = Android.Graphics.Color.ParseColor(MainActivity.teaColorsHex[teaType]);
+        }
+
+
 
         // Create the PendingIntent
         var intent = context.PackageManager.GetLaunchIntentForPackage(context.PackageName);
@@ -33,6 +43,8 @@ public class NotificationService : ILocalNotification
                       .SetContentTitle("Timer Complete") // Set the title
                       .SetSmallIcon(Resource.Drawable.ic_notification) // This is the icon to display
                       .SetWhen(Java.Lang.JavaSystem.CurrentTimeMillis())
+                      .SetColor(notiColour)
+                      .SetColorized(isColorized)
                       .SetContentText($"Your {teaName} is ready!"); // the message to display.        
 
         // Finally, publish the notification:

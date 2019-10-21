@@ -8,7 +8,6 @@
         <ToolbarItem Text="Presets" Clicked="OnPresetClicked" />
     </ContentPage.ToolbarItems>
 
-
     <Grid VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20*"/>

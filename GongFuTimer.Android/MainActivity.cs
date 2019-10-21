@@ -12,6 +12,7 @@ namespace GongFuTimer.Droid
     {
         public static readonly int NOTIFICATION_ID = 1000;
         public static readonly string CHANNEL_ID = "location_notification";
+        public static readonly string[] teaColorsHex = new string[10] { "#ac0000", "#59914f", "#057400", "#535da1", "#008487", "#5a2213", "#cde1db", "#fed25a", "#fcdcd8", "#f36e21" };
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -25,6 +26,7 @@ namespace GongFuTimer.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
+
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {

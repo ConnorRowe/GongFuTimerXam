@@ -55,10 +55,14 @@ namespace GongFuTimer
             if (shouldDelay)
                 await Task.Delay(100);
 
-            if (((NavigationPage)Application.Current.MainPage) != null)
+            NavigationPage navigationPage = (NavigationPage)Application.Current.MainPage;
+
+            if (navigationPage != null)
             {
-                ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = bg;
-                ((NavigationPage)Application.Current.MainPage).BarTextColor = txt;
+                navigationPage.BarBackgroundColor = bg;
+                //navigationPage.BarTextColor = txt;
+                var statusBarService = DependencyService.Get<IStatusBarColour>();
+                statusBarService?.ChangeColour(DarkenColour(bg).ToHex());                    
             }
         }
 
@@ -92,7 +96,7 @@ namespace GongFuTimer
             {
                 if(!App.IsInForeground)
                 {
-                    notificationService.CreateNotification(timerViewModel.TeaName);
+                    notificationService.CreateNotification(timerViewModel.TeaName, timerViewModel.teaType);
                 }
                 else
                 {
@@ -156,8 +160,18 @@ namespace GongFuTimer
                 viewModel.TeaName = preset.name;
                 viewModel.TeaAltName = preset.altname;
                 viewModel.TeaDetails = String.Format("{0}, brew at {1}°C for {2} infusions.", App.teaTypeNames[(int)preset.type], preset.temp, preset.maxinfusions);
+                viewModel.teaType = (int)preset.type;
                 SetToolbarColours(App.teaColoursDarkTxt[(int)preset.type], Color.Black, false);
             }
+        }
+
+        private Color DarkenColour(Color colour)
+        {
+            double r = colour.R * 0.85;
+            double g = colour.G * 0.85;
+            double b = colour.B * 0.85;
+
+            return new Color(r, g, b, colour.A);
         }
     }
 }
