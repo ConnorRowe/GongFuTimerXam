@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Plugin.SimpleAudioPlayer;
+
 using GongFuTimer.ViewModel;
 
 namespace GongFuTimer
@@ -94,11 +95,18 @@ namespace GongFuTimer
         {
             if(targetSeconds - teaTimer.ElapsedSeconds() <= 0.0 && teaTimer.isRunning)
             {
+                if(!App.IsInForeground)
+                {
+                    ILocalNotification service = DependencyService.Get<ILocalNotification>();
+                    service.CreateNotification();
+                }
+
                 teaTimer.Clear();
                 timerViewModel.InfNum = infNum.ToString();
                 timerViewModel.formatTimerNum(0.0);
                 timerViewModel.IsBusy = false;
                 alarmPlayer.Play();
+                
             }
 
             if (teaTimer.isRunning)

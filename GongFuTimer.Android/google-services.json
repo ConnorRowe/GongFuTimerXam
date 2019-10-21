@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "393692525061",
+    "firebase_url": "https://gongfutimer.firebaseio.com",
+    "project_id": "gongfutimer",
+    "storage_bucket": "gongfutimer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:393692525061:android:94d7d6aaafea6dfef2e26c",
+        "android_client_info": {
+          "package_name": "com.connorrowe.gongfutimer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "393692525061-e3ah8lkc77en8ttad09edbtkk3ek96iu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcdiq0gAM_antE3ikik_mn2CIC9xEADNU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "393692525061-e3ah8lkc77en8ttad09edbtkk3ek96iu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
