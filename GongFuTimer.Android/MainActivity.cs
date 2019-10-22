@@ -4,6 +4,7 @@ using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
+using Plugin.CurrentActivity;
 
 namespace GongFuTimer.Droid
 {
@@ -26,7 +27,7 @@ namespace GongFuTimer.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
-
+            CrossCurrentActivity.Current.Init(this, savedInstanceState);
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
@@ -52,6 +53,14 @@ namespace GongFuTimer.Droid
             };
             var notificationManager = (NotificationManager)context.GetSystemService(Context.NotificationService);
             notificationManager.CreateNotificationChannel(channel);
+        }
+
+        public override void OnPostCreate(Bundle savedInstanceState, PersistableBundle persistentState)
+        {
+            base.OnPostCreate(savedInstanceState, persistentState);
+
+            var _ = new StatusBarService();
+            var __ = new NotificationService();
         }
     }
 }

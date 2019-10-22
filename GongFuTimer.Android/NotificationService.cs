@@ -48,7 +48,7 @@ public class NotificationService : ILocalNotification
         //Get tea type colour
 
         string teaName = "tea";
-        if (contentText != string.Empty)
+        if (!string.IsNullOrEmpty(contentText))
         {
             teaName = contentText.ToLower().Trim();
         }

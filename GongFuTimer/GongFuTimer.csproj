@@ -5,6 +5,7 @@
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
     <ApplicationIcon />
     <Win32Resource />
+    <AssemblyName>gongfutimer</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
