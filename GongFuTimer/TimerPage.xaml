@@ -41,7 +41,7 @@
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" Margin="0,8,0,0" VerticalOptions="Fill">
                     <Label Text="Infusion #:"/>
-                    <Label  Text="{Binding InfNum}" TextColor="Black" FontSize="Medium" HorizontalOptions="EndAndExpand"/>
+                    <Label  Text="{Binding InfNum}" TextColor="Black" FontSize="Medium" HorizontalOptions="EndAndExpand" HorizontalTextAlignment="End" MinimumWidthRequest="50" WidthRequest="50"/>
                 </StackLayout>
             </StackLayout>
         </Frame>

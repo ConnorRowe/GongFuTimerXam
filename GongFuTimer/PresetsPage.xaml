@@ -5,7 +5,7 @@
              x:Class="GongFuTimer.PresetsPage"
              Title="Presets">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="+" Clicked="OnNewPresetClicked"/>
+        <ToolbarItem Text="+ New Preset" Clicked="OnNewPresetClicked"/>
     </ContentPage.ToolbarItems>
     <Grid>
         <Grid.ColumnDefinitions>

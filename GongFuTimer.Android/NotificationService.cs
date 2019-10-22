@@ -10,10 +10,42 @@ using Xamarin.Forms;
 [assembly: Dependency(typeof(NotificationService))]
 public class NotificationService : ILocalNotification
 {
-    public void CreateNotification(string contentText, int teaType)
+    public void CreateNotification(string contentText, int teaType, int infusionNum)
     {
         //Get context using CurrentActivity plugin
         var context = (MainActivity)CrossCurrentActivity.Current.Activity;
+
+        //Get appropriate suffix for the infusion number
+
+        string infusion = infusionNum.ToString();
+        bool forceTh = false;
+        if (infusionNum > 9 && infusionNum < 21)
+            forceTh = true;
+
+        char lastChar = infusion[infusion.Length - 1];
+
+        if(forceTh == true)
+        {
+            infusion += "th";
+        }
+        else if (lastChar == '1')
+        {
+            infusion += "st";
+        }
+        else if(lastChar == '2')
+        {
+            infusion += "nd";
+        }
+        else if(lastChar == '3')
+        {
+            infusion += "rd";
+        }
+        else
+        {
+            infusion += "th";
+        }
+
+        //Get tea type colour
 
         string teaName = "tea";
         if (contentText != string.Empty)
@@ -29,8 +61,6 @@ public class NotificationService : ILocalNotification
             notiColour = Android.Graphics.Color.ParseColor(MainActivity.teaColorsHex[teaType]);
         }
 
-
-
         // Create the PendingIntent
         var intent = context.PackageManager.GetLaunchIntentForPackage(context.PackageName);
         intent.AddFlags(ActivityFlags.ClearTop);
@@ -45,7 +75,7 @@ public class NotificationService : ILocalNotification
                       .SetWhen(Java.Lang.JavaSystem.CurrentTimeMillis())
                       .SetColor(notiColour)
                       .SetColorized(isColorized)
-                      .SetContentText($"Your {teaName} is ready!"); // the message to display.        
+                      .SetContentText($"Your {infusion} infusion of {teaName} is ready!"); // the message to display.        
 
         // Finally, publish the notification:
         var notificationManager = NotificationManagerCompat.From(context);

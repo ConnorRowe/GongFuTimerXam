@@ -96,7 +96,7 @@ namespace GongFuTimer
             {
                 if(!App.IsInForeground)
                 {
-                    notificationService.CreateNotification(timerViewModel.TeaName, timerViewModel.teaType);
+                    notificationService.CreateNotification(timerViewModel.TeaName, timerViewModel.teaType, (int)infNum);
                 }
                 else
                 {

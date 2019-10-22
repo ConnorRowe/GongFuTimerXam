@@ -2,7 +2,7 @@
 {
     public interface ILocalNotification
     {
-        void CreateNotification(string contentText, int teaType);
+        void CreateNotification(string contentText, int teaType, int infusionNum);
         void CancelNotification();
     }
 
