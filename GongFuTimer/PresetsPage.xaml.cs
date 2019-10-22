@@ -1,5 +1,7 @@
 ﻿using GongFuTimer.ViewModel;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,6 +15,7 @@ namespace GongFuTimer
         public PresetsPage()
         {
             InitializeComponent();
+            ((Preset)BindingContext).RefreshCommand = new Command(RefreshDataGrid);
         }
         public PresetsPage(TimerPage timerpage)
         {
@@ -32,7 +35,7 @@ namespace GongFuTimer
         {
             base.OnAppearing();
 
-            PresetsDatagrid.ItemsSource = await App.Database.GetPresetsAsync();
+            (BindingContext as Preset).PresetCollection = new List<Preset>(await App.Database.GetPresetsAsync());
         }
 
         async private void ApplyButton_Clicked(object sender, EventArgs e)
@@ -43,12 +46,22 @@ namespace GongFuTimer
 
         async private void DeleteButton_Clicked(object sender, EventArgs e)
         {
-            Preset preset = ((Preset)BindingContext).SelectedPreset;
-            ((Preset)BindingContext).SelectedPreset = null;
-            await App.Database.DeletePresetAsync(preset);
-            
-            PresetsDatagrid.ItemsSource = await App.Database.GetPresetsAsync();
+            var c = (Preset)BindingContext;
 
+            Preset preset = c.SelectedPreset;
+            if (preset != null)
+            {
+
+                c.SelectedPreset = null;
+                await App.Database.DeletePresetAsync(preset);
+
+                c.PresetCollection = new List<Preset>(await App.Database.GetPresetsAsync());
+            }
+        }
+
+        async private void RefreshDataGrid()
+        {
+            ((Preset)BindingContext).PresetCollection = new List<Preset>(await App.Database.GetPresetsAsync());
         }
     }
 }

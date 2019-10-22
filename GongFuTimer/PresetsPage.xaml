@@ -18,7 +18,7 @@
             <RowDefinition Height="25*"/>
         </Grid.RowDefinitions>
 
-        <dg:DataGrid x:Name="PresetsDatagrid" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" BorderColor="#CCCCCC" HeaderBackground="#E0E6F8" SelectedItem="{Binding SelectedPreset}" IsSortable="False" SelectionEnabled="True" IsEnabled="True" ActiveRowColor="{Binding RowColour}" >
+        <dg:DataGrid x:Name="PresetsDatagrid" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" BorderColor="#CCCCCC" HeaderBackground="#E0E6F8" SelectedItem="{Binding SelectedPreset}" IsSortable="False" SelectionEnabled="True" IsEnabled="True" ActiveRowColor="{Binding RowColour}" ItemsSource="{Binding PresetCollection}" IsRefreshing="{Binding IsRefreshing}" PullToRefreshCommand="{Binding RefreshCommand}" >
             <dg:DataGrid.HeaderFontSize>
                 <OnIdiom  x:TypeArguments="x:Double">
                     <OnIdiom.Tablet>15</OnIdiom.Tablet>

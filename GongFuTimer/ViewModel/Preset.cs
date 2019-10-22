@@ -1,7 +1,10 @@
 ﻿using SQLite;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace GongFuTimer.ViewModel
@@ -52,6 +55,22 @@ namespace GongFuTimer.ViewModel
         }
 
         [Ignore]
+        private List<Preset> presetCollection { get; set; }
+        [Ignore]
+        public List<Preset> PresetCollection
+        {
+            get { return presetCollection; }
+            set
+            {
+                if(presetCollection != value)
+                {
+                    presetCollection = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        [Ignore]
         private bool isDataGridEnabled { get; set; }
         [Ignore]
         public bool IsDataGridEnabled
@@ -97,6 +116,23 @@ namespace GongFuTimer.ViewModel
         public Color RowColour { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        [Ignore]
+        public ICommand RefreshCommand { get; set; }
+
+        private bool isRefreshing;
+        public bool IsRefreshing
+        {
+            get { return isRefreshing; }
+            set
+            {
+                if(isRefreshing != value)
+                {
+                    isRefreshing = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         void OnPropertyChanged([CallerMemberName] string name = "")
         {
