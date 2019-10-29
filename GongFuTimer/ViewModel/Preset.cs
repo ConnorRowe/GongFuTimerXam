@@ -22,7 +22,6 @@ namespace GongFuTimer.ViewModel
             {
                 "Black", "Green", "Matcha", "Oolong", "Raw Pu Ehr", "Ripened Pu Ehr", "White", "Yellow", "Tisane", "Medicinal Herbs"
             };
-            isDataGridEnabled = true;
         }
 
         [PrimaryKey, AutoIncrement]
@@ -39,7 +38,7 @@ namespace GongFuTimer.ViewModel
         [Ignore]
         public List<string> teatypes { get; set; }
         [Ignore]
-        private int selectedTypeIndex { get; set; }
+        private int selectedTypeIndex { get; set; } = -1;
         [Ignore]
         public int SelectedTypeIndex
         {
@@ -69,22 +68,7 @@ namespace GongFuTimer.ViewModel
                 }
             }
         }
-
-        [Ignore]
-        private bool isDataGridEnabled { get; set; }
-        [Ignore]
-        public bool IsDataGridEnabled
-        {
-            get { return isDataGridEnabled; }
-            set
-            {
-                if(isDataGridEnabled != value)
-                {
-                    isDataGridEnabled = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
+               
         [Ignore]
         private Preset selectedPreset { get; set; }
         [Ignore]
@@ -116,23 +100,6 @@ namespace GongFuTimer.ViewModel
         public Color RowColour { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-        [Ignore]
-        public ICommand RefreshCommand { get; set; }
-
-        private bool isRefreshing;
-        public bool IsRefreshing
-        {
-            get { return isRefreshing; }
-            set
-            {
-                if(isRefreshing != value)
-                {
-                    isRefreshing = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
 
         void OnPropertyChanged([CallerMemberName] string name = "")
         {

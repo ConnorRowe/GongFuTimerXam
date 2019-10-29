@@ -42,7 +42,6 @@
     <AndroidStoreUncompressedFileExtensions>
     </AndroidStoreUncompressedFileExtensions>
     <AndroidLinkSkip>Xamarin.Android.Support.v7.AppCompat;Xamarin.Android.Support.v4</AndroidLinkSkip>
-    <AndroidLinkTool>r8</AndroidLinkTool>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

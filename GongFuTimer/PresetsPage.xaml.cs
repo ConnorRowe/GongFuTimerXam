@@ -12,15 +12,11 @@ namespace GongFuTimer
     {
         TimerPage timerPage;
 
-        public PresetsPage()
-        {
-            InitializeComponent();
-            ((Preset)BindingContext).RefreshCommand = new Command(RefreshDataGrid);
-        }
         public PresetsPage(TimerPage timerpage)
         {
             timerPage = timerpage;
             InitializeComponent();
+            presetListView.ItemTemplate = new DataTemplate(typeof(PresetListCell));
         }
 
         async void OnNewPresetClicked(object sender, EventArgs e)
@@ -59,9 +55,10 @@ namespace GongFuTimer
             }
         }
 
-        async private void RefreshDataGrid()
+        private async void EditButton_Clicked(object sender, EventArgs e)
         {
-            ((Preset)BindingContext).PresetCollection = new List<Preset>(await App.Database.GetPresetsAsync());
+            Preset editPreset = ((Preset)BindingContext).SelectedPreset;
+            await Navigation.PushAsync(new NewPresetPage(true, editPreset));
         }
     }
 }

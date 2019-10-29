@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:dg="clr-namespace:Xamarin.Forms.DataGrid;assembly=Xamarin.Forms.DataGrid"
+             xmlns:local="clr-namespace:GongFuTimer"
              x:Class="GongFuTimer.PresetsPage"
              Title="Presets">
     <ContentPage.ToolbarItems>
@@ -18,28 +18,28 @@
             <RowDefinition Height="25*"/>
         </Grid.RowDefinitions>
 
-        <dg:DataGrid x:Name="PresetsDatagrid" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" BorderColor="#CCCCCC" HeaderBackground="#E0E6F8" SelectedItem="{Binding SelectedPreset}" IsSortable="False" SelectionEnabled="True" IsEnabled="True" ActiveRowColor="{Binding RowColour}" ItemsSource="{Binding PresetCollection}" IsRefreshing="{Binding IsRefreshing}" PullToRefreshCommand="{Binding RefreshCommand}" >
-            <dg:DataGrid.HeaderFontSize>
-                <OnIdiom  x:TypeArguments="x:Double">
-                    <OnIdiom.Tablet>15</OnIdiom.Tablet>
-                    <OnIdiom.Phone>13</OnIdiom.Phone>
-                </OnIdiom>
-            </dg:DataGrid.HeaderFontSize>
-            <dg:DataGrid.Columns>
-                <dg:DataGridColumn Title="Name" PropertyName="name" Width="10*"/>
-                <dg:DataGridColumn Title="Type" PropertyName="type" Width="8*"/>
-                <dg:DataGridColumn Title="Base Secs" PropertyName="baseseconds" Width="4*"/>
-                <dg:DataGridColumn Title="Temp" PropertyName="temp" Width="4*"/>
-                <dg:DataGridColumn Title="Max Infusions" PropertyName="maxinfusions" Width="4*"/>
-                <dg:DataGridColumn Title="Alt Name" PropertyName="altname" Width="8*"/>
-            </dg:DataGrid.Columns>
-        </dg:DataGrid>
+        <ListView x:Name="presetListView" ItemsSource="{Binding PresetCollection}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" SelectedItem="{Binding SelectedPreset}" RowHeight="50" Margin="0,0,0,8">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <local:PresetListCell Name="{Binding name}" Type="{Binding type}" BaseSecs="{Binding baseseconds, StringFormat='{0:N}s'}" PlusSecs="{Binding plusseconds, StringFormat='+{0:N}s'}" Temp="{Binding temp, StringFormat='{0}°C'}" MaxInf="{Binding maxinfusions}" AltName="{Binding altname}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>            
+        </ListView>
         
-        
-        <StackLayout Margin="4" Grid.Column="1" Grid.Row="1">
-            <Button Text="Apply" Clicked="ApplyButton_Clicked"/>
-            <Button Text="Delete" Clicked="DeleteButton_Clicked"/>
-        </StackLayout>
+        <Grid Margin="4" Grid.Column="1" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50*"/>
+                <RowDefinition Height="50*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>            
+            </Grid.ColumnDefinitions>
+            
+            <Button Text="Apply" Grid.ColumnSpan="2" Clicked="ApplyButton_Clicked"/>
+            <Button Text="Edit" Grid.Column="0" Grid.Row="1" Clicked="EditButton_Clicked"/>
+            <Button Text="Delete" Grid.Column="1" Grid.Row="1" Clicked="DeleteButton_Clicked"/>
+        </Grid>
     </Grid>
 
 </ContentPage>

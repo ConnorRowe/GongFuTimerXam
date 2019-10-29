@@ -32,13 +32,7 @@ namespace GongFuTimer
         {
             InitializeComponent();
 
-            Xamarin.Forms.DataGrid.DataGridComponent.Init();
-
             MainPage = new NavigationPage(new TimerPage());
-
-
-            //((NavigationPage)Application.Current.MainPage).BarBackgroundColor = Color.Black;
-
         }
 
         protected override void OnStart()
