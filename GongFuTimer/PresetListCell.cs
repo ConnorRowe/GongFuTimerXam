@@ -9,7 +9,7 @@ namespace GongFuTimer
     {
         Label teaName, teaType, teaBaseSecs, teaPlusSecs, teaTemp, teaMaxInf, teaAltName;
         BoxView teaColourBox;
-        
+        StackLayout cellWrapper;
 
         public static readonly BindableProperty NameProperty = BindableProperty.Create("Name", typeof(string), typeof(PresetListCell), "Name");
         public static readonly BindableProperty TypeProperty = BindableProperty.Create("Type", typeof(ViewModel.Preset.TeaType), typeof(PresetListCell), ViewModel.Preset.TeaType.Black);
@@ -73,7 +73,7 @@ namespace GongFuTimer
             teaTemp.MaxLines = 1;
             teaMaxInf.MaxLines = 1;
 
-            StackLayout cellWrapper = new StackLayout();
+            cellWrapper = new StackLayout();
             Grid gridLayout = new Grid();
             gridLayout.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Auto) });
             gridLayout.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(8) });
@@ -130,6 +130,9 @@ namespace GongFuTimer
                 teaMaxInf.Text = string.Format("{0} Infs", MaxInf);
                 teaAltName.Text = AltName;
                 teaType.Text = App.teaTypeNames[(int)Type];
+
+                Color bg = App.teaColoursDarkTxt[(int)Type];
+                cellWrapper.BackgroundColor = new Color(bg.R, bg.G, bg.B, 0.1);
             }
         }
     }

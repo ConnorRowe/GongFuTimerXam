@@ -58,7 +58,10 @@ namespace GongFuTimer
         private async void EditButton_Clicked(object sender, EventArgs e)
         {
             Preset editPreset = ((Preset)BindingContext).SelectedPreset;
-            await Navigation.PushAsync(new NewPresetPage(true, editPreset));
+            if (editPreset != null)
+            {
+                await Navigation.PushAsync(new NewPresetPage(true, editPreset));
+            }
         }
     }
 }
