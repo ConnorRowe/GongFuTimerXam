@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:local="clr-namespace:GongFuTimer"
              mc:Ignorable="d"
              Title="Create a New Preset"
              x:Class="GongFuTimer.NewPresetPage">
@@ -21,10 +22,25 @@
             <StackLayout Grid.Row="0" Grid.Column="1">
                 <Entry x:Name="nameEntry" Text="{Binding name, Mode=OneWayToSource}" Placeholder="Tea Name"/>
                 <Picker x:Name="typePicker" ItemsSource="{Binding teatypes}" Title="Tea Type" SelectedIndex="{Binding SelectedTypeIndex, Mode=TwoWay}"/>
-                <Entry x:Name="baseEntry" Text="{Binding baseseconds, Mode=OneWayToSource}" Keyboard="Numeric" Placeholder="Base Seconds"/>
-                <Entry x:Name="plusEntry" Text="{Binding plusseconds, Mode=OneWayToSource}" Keyboard="Numeric" Placeholder="+ Seconds"/>
-                <Entry x:Name="tempEntry" Text="{Binding temp, Mode=OneWayToSource}" Keyboard="Numeric" Placeholder="Temperature"/>
-                <Entry x:Name="infEntry" Text="{Binding maxinfusions, Mode=OneWayToSource}" Keyboard="Numeric" Placeholder="Maximum Infusions"/>
+                <Entry x:Name="baseEntry" Text="{Binding baseseconds, Mode=OneWayToSource}" Keyboard="Numeric" Placeholder="Base Seconds" ReturnType="Next">
+                    <Entry.Behaviors>
+                        <local:NextEntryBehavior NextView="{x:Reference plusEntry}"/>
+                    </Entry.Behaviors></Entry>
+                <Entry x:Name="plusEntry" Text="{Binding plusseconds, Mode=OneWayToSource}" Keyboard="Numeric" Placeholder="+ Seconds" ReturnType="Next">
+                    <Entry.Behaviors>
+                        <local:NextEntryBehavior NextView="{x:Reference tempEntry}"/>
+                    </Entry.Behaviors>
+                </Entry>
+                <Entry x:Name="tempEntry" Text="{Binding temp, Mode=OneWayToSource}" Keyboard="Numeric" Placeholder="Temperature" ReturnType="Next">
+                    <Entry.Behaviors>
+                        <local:NextEntryBehavior NextView="{x:Reference infEntry}"/>
+                    </Entry.Behaviors>
+                </Entry>
+                <Entry x:Name="infEntry" Text="{Binding maxinfusions, Mode=OneWayToSource}" Keyboard="Numeric" Placeholder="Maximum Infusions" ReturnType="Next">
+                    <Entry.Behaviors>
+                        <local:NextEntryBehavior NextView="{x:Reference altnEntry}"/>
+                    </Entry.Behaviors>
+                </Entry>
                 <Entry x:Name="altnEntry" Text="{Binding altname, Mode=OneWayToSource}" Placeholder="Alternate Name"/>
             </StackLayout>
 
