@@ -11,6 +11,7 @@ namespace GongFuTimer
     public partial class PresetsPage : ContentPage
     {
         TimerPage timerPage;
+        bool isDelBtnConfirming = false;
 
         public PresetsPage(TimerPage timerpage)
         {
@@ -44,14 +45,25 @@ namespace GongFuTimer
         {
             var c = (Preset)BindingContext;
 
-            Preset preset = c.SelectedPreset;
-            if (preset != null)
+            if (!isDelBtnConfirming && c.SelectedPreset != null)
             {
+                isDelBtnConfirming = true;
+                ((Button)sender).Text = "Tap again to confirm";
+            }
+            else
+            {
+                Preset preset = c.SelectedPreset;
+                if (preset != null)
+                {
 
-                c.SelectedPreset = null;
-                await App.Database.DeletePresetAsync(preset);
+                    c.SelectedPreset = null;
+                    await App.Database.DeletePresetAsync(preset);
 
-                c.PresetCollection = new List<Preset>(await App.Database.GetPresetsAsync());
+                    c.PresetCollection = new List<Preset>(await App.Database.GetPresetsAsync());
+                }
+
+                isDelBtnConfirming = false;
+                ((Button)sender).Text = "Delete";
             }
         }
 
