@@ -8,10 +8,13 @@ namespace GongFuTimer.ViewModel
     class TimerViewModel : INotifyPropertyChanged
     {
 
-        public TimerViewModel(Action starttimercmd, Action resettimercmd)
+        public TimerViewModel(Action starttimercmd, Action resettimercmd, Action plusinfcmd, Action subinfcmd, Action resetinfcmd)
         {
             StartTimerCommand = new Command(starttimercmd, () => !IsBusy);
             ResetTimerCommand = new Command(resettimercmd);
+            PlusInfCommand = new Command(plusinfcmd);
+            SubInfCommand = new Command(subinfcmd);
+            ResetInfCommand = new Command(resetinfcmd);
         }
 
         private string baseSecs = "0";
@@ -133,6 +136,20 @@ namespace GongFuTimer.ViewModel
             }
         }
 
+        private bool isInfResetVisible = false;
+        public bool IsInfResetVisible
+        {
+            get { return isInfResetVisible; }
+            set
+            {
+                if(isInfResetVisible != value)
+                {
+                    isInfResetVisible = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public void formatTimerNum(Double remainingSecs)
         {
             double minutes = 0.0;
@@ -165,5 +182,8 @@ namespace GongFuTimer.ViewModel
 
         public Command StartTimerCommand { get; }
         public Command ResetTimerCommand { get; }
+        public Command PlusInfCommand { get; }
+        public Command SubInfCommand { get; }
+        public Command ResetInfCommand { get; }
     }
 }

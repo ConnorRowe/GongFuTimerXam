@@ -72,6 +72,7 @@ namespace GongFuTimer
             teaPlusSecs.MaxLines = 1;
             teaTemp.MaxLines = 1;
             teaMaxInf.MaxLines = 1;
+            teaAltName.Margin = new Thickness(0.0, 0.0, 4.0, 0.0);
 
             cellWrapper = new StackLayout();
             Grid gridLayout = new Grid();

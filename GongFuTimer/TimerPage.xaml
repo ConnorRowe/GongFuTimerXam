@@ -8,11 +8,11 @@
         <ToolbarItem Text="Presets" Clicked="OnPresetClicked" />
     </ContentPage.ToolbarItems>
 
-    <Grid VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand">
+    <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20*"/>
-            <ColumnDefinition Width="60*"/>
-            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="30*"/>
+            <ColumnDefinition Width="40*"/>
+            <ColumnDefinition Width="30*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="25*"/> <!-- Tea preset info -->
@@ -21,15 +21,20 @@
             <RowDefinition Height="25*"/> <!-- Timer output -->
         </Grid.RowDefinitions>
 
+        <!-- Timer output -->
+        <Frame Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+            <Label Text="{Binding TimerOutput}" FontSize="52" MaxLines="1"/>
+        </Frame>
+
         <!-- Tea preset info -->
-        <StackLayout Grid.Column="0" Grid.ColumnSpan="3" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,8,0,8">
+        <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,8,0,8">
             <Label Text="{Binding TeaName}"/>
             <Label Text="{Binding TeaDetails}"/>
             <Label Text="{Binding TeaAltName}" FontAttributes="Italic"/>
         </StackLayout>
 
         <!-- Infusion input / info -->
-        <Frame Grid.Column="1" Grid.Row="1" VerticalOptions="End" HorizontalOptions="Fill">
+        <Frame  Grid.Row="2" Grid.Column="1" VerticalOptions="Fill" HorizontalOptions="Fill">
             <StackLayout Orientation="Vertical">
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="Fill">
                     <Label Text="Base Secs:" AnchorY="0.5"/>
@@ -41,20 +46,24 @@
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" Margin="0,8,0,0" VerticalOptions="Fill">
                     <Label Text="Infusion #:"/>
-                    <Label  Text="{Binding InfNum}" TextColor="Black" FontSize="Medium" HorizontalOptions="EndAndExpand" HorizontalTextAlignment="End" MinimumWidthRequest="50" WidthRequest="50"/>
+                    <Label Text="{Binding InfNum}" TextColor="Black" FontSize="Medium" HorizontalOptions="EndAndExpand" HorizontalTextAlignment="End" MinimumWidthRequest="40" WidthRequest="40"/>
                 </StackLayout>
             </StackLayout>
         </Frame>
+        
+        <!-- Infusion number manipulation -->
+        <StackLayout Grid.Row="2" Grid.Column="2" VerticalOptions="End" HorizontalOptions="Fill" Margin="0,0,4,0" HeightRequest="64" Orientation="Horizontal">
+            <Button Text="+" FontSize="Micro" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="32" HeightRequest="32" Margin="0,0,0,0" Command="{Binding PlusInfCommand}"/>
+            <Button Text="-" FontSize="Micro" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="32" HeightRequest="32" Margin="-8,0,0,0" Command="{Binding SubInfCommand}"/>
+            <Button Text="back" FontSize="Micro" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="56" HeightRequest="32" Margin="-8,0,0,0" Command="{Binding ResetInfCommand}" IsVisible="{Binding IsInfResetVisible}"/>
+        </StackLayout>
+
 
         <!-- Buttons -->
-        <StackLayout Grid.Row="2" Grid.Column="1" VerticalOptions="End" Margin="0,0,0,8">
+        <StackLayout Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" Margin="24,0,24,8">
             <Button Text="Start" Command="{Binding StartTimerCommand}" IsEnabled="{Binding IsBusy}" VerticalOptions="End"/>
             <Button Text="Reset" Command="{Binding ResetTimerCommand}" VerticalOptions="End"/>
         </StackLayout>
 
-        <!-- Timer output -->
-        <Frame Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-            <Label Text="{Binding TimerOutput}" FontSize="48" MaxLines="1"/>
-        </Frame>
     </Grid>
 </ContentPage>

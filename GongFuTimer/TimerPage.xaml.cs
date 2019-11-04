@@ -19,12 +19,13 @@ namespace GongFuTimer
         double infNum = 0.0;
         ISimpleAudioPlayer alarmPlayer = CrossSimpleAudioPlayer.Current;
         private readonly ILocalNotification notificationService;
+        private double tempInfNum = 0.0f;
 
         public TimerPage()
         {
             InitializeComponent();
             teaTimer.Clear();
-            timerViewModel = new TimerViewModel(StartTimer, ClearTimer);
+            timerViewModel = new TimerViewModel(StartTimer, ClearTimer, PlusInfTemp, SubInfTemp, ResetInfTemp);
             notificationService = DependencyService.Get<ILocalNotification>();
 
             var assembly = typeof(App).GetTypeInfo().Assembly;
@@ -116,9 +117,16 @@ namespace GongFuTimer
 
         public void StartTimer()
         {
+            if(infNum!= tempInfNum)
+            {
+                infNum = tempInfNum;
+            }
             //target Seconds = base time + (additional infusion time * infusion number)
             targetSeconds = StoDo(timerViewModel.BaseSecs) + (StoDo(timerViewModel.PlusSecs) * infNum);
             ++infNum; timerViewModel.InfNum = infNum.ToString();
+            tempInfNum = infNum;
+
+            UpdateResetInfBtnVisibility();
 
             if (targetSeconds > 0.0f)
             {
@@ -133,6 +141,7 @@ namespace GongFuTimer
             infNum = 0.0; timerViewModel.InfNum = infNum.ToString();
             timerViewModel.formatTimerNum(0.0);
             timerViewModel.IsBusy = false;
+            tempInfNum = infNum;
         }
 
         private double StoDo(string str)
@@ -172,6 +181,35 @@ namespace GongFuTimer
             double b = colour.B * 0.85;
 
             return new Color(r, g, b, colour.A);
+        }
+
+        public void PlusInfTemp()
+        {
+            ++tempInfNum; timerViewModel.InfNum = tempInfNum.ToString();
+            UpdateResetInfBtnVisibility();
+        }
+        public void SubInfTemp()
+        {
+            if(tempInfNum > 0)
+            {
+                --tempInfNum; timerViewModel.InfNum = tempInfNum.ToString();
+                UpdateResetInfBtnVisibility();
+            }
+        }
+        public void ResetInfTemp()
+        {
+            tempInfNum = infNum; timerViewModel.InfNum = tempInfNum.ToString();
+            UpdateResetInfBtnVisibility();
+        }
+
+        public bool IsResetChanged()
+        {
+            return infNum != tempInfNum;
+        }
+
+        private void UpdateResetInfBtnVisibility()
+        {
+            ((TimerViewModel)BindingContext).IsInfResetVisible = infNum != tempInfNum;
         }
     }
 }
